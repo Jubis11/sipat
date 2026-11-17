@@ -10,6 +10,19 @@
   --muted: #ddd6fe;
 }
 
+/* Variáveis do Modo Claro */
+body.tema-claro {
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --surface-light: #cbd5e1;
+  --primary: #0f4c81;
+  --accent: #0ea5e9;
+  --danger: #dc2626;
+  --success: #059669;
+  --text: #0f172a;
+  --muted: #334155;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -25,6 +38,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 header {
@@ -32,6 +46,11 @@ header {
   border-bottom: 2px solid var(--primary);
   padding: 2.5rem 1rem;
   text-align: center;
+}
+
+body.tema-claro header {
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  border-bottom: 2px solid #0284c7;
 }
 
 header .badge {
@@ -45,6 +64,11 @@ header .badge {
   margin-bottom: 0.8rem;
 }
 
+body.tema-claro header .badge {
+  background: #0f4c81;
+  color: #ffffff;
+}
+
 header h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
@@ -54,6 +78,30 @@ header p {
   color: var(--muted);
   max-width: 720px;
   margin: 0 auto;
+}
+
+/* Botão de Alternar Tema */
+.btn-tema {
+  margin-top: 1rem;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--primary);
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-tema:hover {
+  background: var(--primary);
+  color: #12091d;
+}
+
+body.tema-claro .btn-tema:hover {
+  background: var(--primary);
+  color: #ffffff;
 }
 
 nav {
@@ -68,6 +116,11 @@ nav {
   justify-content: center;
   gap: 0.8rem;
   border-bottom: 1px solid var(--surface-light);
+}
+
+body.tema-claro nav {
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
 }
 
 nav a {
@@ -100,6 +153,10 @@ section {
   border-radius: 14px;
   border: 1px solid var(--surface-light);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+body.tema-claro section {
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
 }
 
 h2 {
@@ -182,6 +239,10 @@ li {
   font-size: 0.9rem;
 }
 
+body.tema-claro .step-num {
+  color: #ffffff;
+}
+
 .alerta-box {
   background: rgba(248, 113, 113, 0.14);
   border-left: 4px solid var(--danger);
@@ -202,7 +263,7 @@ li {
   padding: 1.2rem;
   border-radius: 10px;
   border: 1px solid var(--surface-light);
-  transition: transform 0.2s, border-color 0.2s;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .info-card:hover {
@@ -218,7 +279,8 @@ li {
   max-width: 540px;
 }
 
-.simulador-form input, .simulador-form select {
+.simulador-form input,
+.simulador-form select {
   padding: 0.7rem;
   border-radius: 8px;
   border: 1px solid var(--surface-light);
@@ -242,6 +304,10 @@ li {
   border-radius: 999px;
   overflow: hidden;
   margin-bottom: 0.8rem;
+}
+
+body.tema-claro .barra-fundo {
+  background: #e2e8f0;
 }
 
 .barra-progresso {
@@ -326,7 +392,7 @@ li {
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, background-color 0.2s;
 }
 
 .btn:hover {
@@ -385,6 +451,68 @@ li {
   border-radius: 10px;
   font-weight: bold;
   display: none;
+}
+
+/* Cartões e Inputs no Modo Claro */
+body.tema-claro .destaque-noticia,
+body.tema-claro .timeline-item,
+body.tema-claro .info-card,
+body.tema-claro .tab-content,
+body.tema-claro .card-checklist,
+body.tema-claro .quiz-pergunta,
+body.tema-claro .painel-risco {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+body.tema-claro .simulador-form input,
+body.tema-claro .simulador-form select {
+  background: #ffffff;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+/* Correção de Botões, Abas e Hover no Modo Claro */
+body.tema-claro .btn,
+body.tema-claro .tab-btn.active,
+body.tema-claro nav a:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+body.tema-claro .btn-secundario {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+body.tema-claro .btn-secundario:hover {
+  background: #cbd5e1;
+}
+
+body.tema-claro .tab-btn:not(.active):hover {
+  background: #e0f2fe;
+  color: var(--primary);
+}
+
+body.tema-claro .quiz-pergunta label:hover {
+  background: #e0f2fe;
+}
+
+body.tema-claro .info-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 6px 16px rgba(15, 76, 129, 0.12);
+}
+
+body.tema-claro .opcao-correta {
+  background: #dcfce7 !important;
+  border-color: #16a34a;
+  color: #14532d !important;
+}
+
+body.tema-claro .opcao-errada {
+  background: #fee2e2 !important;
+  border-color: #dc2626;
+  color: #7f1d1d !important;
 }
 
 footer {

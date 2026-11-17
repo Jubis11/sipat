@@ -113,3 +113,15 @@ function refazerQuiz() {
   });
   document.getElementById('resultado-quiz').style.display = 'none';
 }
+
+// 5. Alternar entre Modo Escuro e Modo Claro
+function alternarTema() {
+  document.body.classList.toggle('tema-claro');
+  const botao = document.getElementById('btn-tema');
+
+  if (document.body.classList.contains('tema-claro')) {
+    botao.textContent = '🌙 Modo Escuro';
+  } else {
+    botao.textContent = '☀️ Modo Claro';
+  }
+}
