@@ -23,21 +23,22 @@ function analisarProposta() {
   const painel = document.getElementById('painel-risco');
   const barra = document.getElementById('barra-progresso');
   const texto = document.getElementById('texto-risco');
+  const modoClaro = document.body.classList.contains('tema-claro');
 
   painel.style.display = 'block';
   barra.style.width = `${Math.max(pontosRisco, 15)}%`;
 
   if (pontosRisco >= 60) {
-    barra.style.backgroundColor = '#f87171';
-    texto.style.color = '#fca5a5';
+    barra.style.backgroundColor = '#dc2626';
+    texto.style.color = modoClaro ? '#991b1b' : '#fca5a5';
     texto.textContent = `🚨 RISCO CRÍTICO (${pontosRisco}%): Altíssima chance de pirâmide financeira ou plataforma falsa! Nunca transfira dinheiro nem pague taxas para sacar.`;
   } else if (pontosRisco >= 30) {
-    barra.style.backgroundColor = '#fbbf24';
-    texto.style.color = '#fde68a';
+    barra.style.backgroundColor = '#d97706';
+    texto.style.color = modoClaro ? '#92400e' : '#fde68a';
     texto.textContent = `⚠️ RISCO MODERADO (${pontosRisco}%): Sinais de alerta detectados. Consulte se a empresa tem autorização da CVM antes de investir.`;
   } else {
-    barra.style.backgroundColor = '#34d399';
-    texto.style.color = '#a7f3d0';
+    barra.style.backgroundColor = '#059669';
+    texto.style.color = modoClaro ? '#065f46' : '#a7f3d0';
     texto.textContent = `✅ RISCO BAIXO (${pontosRisco}%): Sem sinais típicos de pirâmide, mas lembre-se de operar apenas em corretoras oficiais e ativar o 2FA.`;
   }
 }
@@ -55,12 +56,14 @@ function abrirAba(idAba, botaoClicado) {
 function atualizarChecklist() {
   const checks = document.querySelectorAll('.chk-posto:checked').length;
   const status = document.getElementById('status-checklist');
+  const modoClaro = document.body.classList.contains('tema-claro');
+
   if (checks === 3) {
     status.textContent = '✅ 3 de 3 etapas concluídas! Posto de trabalho seguro.';
-    status.style.color = '#34d399';
+    status.style.color = modoClaro ? '#059669' : '#34d399';
   } else {
     status.textContent = `${checks} de 3 etapas concluídas.`;
-    status.style.color = '#c084fc';
+    status.style.color = modoClaro ? '#0f4c81' : '#c084fc';
   }
 }
 
@@ -76,7 +79,6 @@ function corrigirQuiz() {
 
   let acertos = 0;
 
-  // Limpa marcações anteriores
   document.querySelectorAll('#form-quiz label').forEach(lbl => {
     lbl.classList.remove('opcao-correta', 'opcao-errada');
   });
@@ -99,10 +101,14 @@ function corrigirQuiz() {
   }
 
   const resBox = document.getElementById('resultado-quiz');
+  const modoClaro = document.body.classList.contains('tema-claro');
+
   resBox.style.display = 'block';
-  resBox.style.background = acertos >= 4 ? 'rgba(52, 211, 153, 0.2)' : 'rgba(251, 191, 36, 0.2)';
-  resBox.style.border = acertos >= 4 ? '1px solid #34d399' : '1px solid #fbbf24';
-  resBox.style.color = '#faf5ff';
+  resBox.style.background = acertos >= 4
+    ? (modoClaro ? '#dcfce7' : 'rgba(52, 211, 153, 0.2)')
+    : (modoClaro ? '#fef3c7' : 'rgba(251, 191, 36, 0.2)');
+  resBox.style.border = acertos >= 4 ? '1px solid #16a34a' : '1px solid #d97706';
+  resBox.style.color = modoClaro ? '#0f172a' : '#faf5ff';
   resBox.innerHTML = `Resultado: Você acertou <strong>${acertos} de 5</strong> perguntas! Confira acima as respostas marcadas em verde.`;
 }
 
@@ -124,4 +130,13 @@ function alternarTema() {
   } else {
     botao.textContent = '☀️ Modo Claro';
   }
+
+  // Atualiza cores caso os resultados já estejam visíveis na tela
+  if (document.getElementById('resultado-quiz').style.display === 'block') {
+    corrigirQuiz();
+  }
+  if (document.getElementById('painel-risco').style.display === 'block') {
+    analisarProposta();
+  }
+  atualizarChecklist();
 }
